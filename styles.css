@@ -1,0 +1,337 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px;
+  padding: 20px;
+}
+
+/* Button Styles */
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Cancel Button */
+.cancel-button {
+  background-color: grey;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background-color: darkgray;
+}
+
+/* Create Button */
+.create-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.create-button:hover {
+  background-color: #0056b3;
+}
+
+/* Add space between buttons */
+.row {
+  gap: 10px;
+  /* Space between buttons */
+}
+
+/* Modal Styles */
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background-color: #e1dfdf;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(232, 231, 231, 0.3);
+  z-index: 1000;
+  width: 80%;
+  height: 70%;
+  /* Increased size */
+  max-width: 700px;
+  /* Larger modal */
+  padding: 30px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Animation for Modal */
+.modal.show {
+  display: block;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Modal Content */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Close Button */
+.close {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  color: #aaa;
+  cursor: pointer;
+}
+
+/* Modal Background Fade Effect */
+.modal::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(245, 245, 245, 0.929);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show::before {
+  opacity: 1;
+}
+
+/* Modal Input Fields */
+.modal-input {
+  width: 100%;
+  /* Full width of the modal */
+  padding: 8px;
+  /* Add padding inside the input */
+  margin-top: 3px;
+  /* Add spacing between label and input */
+  margin-bottom: 10px;
+  /* Add spacing between inputs */
+  border: 1px solid #ccc;
+  /* Border style */
+  border-radius: 5px;
+  /* Rounded corners */
+  box-sizing: border-box;
+  /* Include padding and border in width */
+  font-size: 14px;
+  /* Adjust font size */
+}
+
+p {
+  margin: 0;
+  /* Removes the default margin */
+}
+
+/* Task List Styles */
+#tasks {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Task Card Styles */
+.task-card {
+  background-color: #f8f9fa;
+  width: 400px;
+  border-radius: 8px;
+  margin: 10px 0;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+/* Task Card Animation */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Task Card Delete Icon */
+.delete-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: #dc3545;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.delete-icon:hover {
+  color: #c82333;
+}
+
+/* Task Card Text */
+.task-card h3 {
+  margin: 5px 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.task-card p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.task-card .task-date {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Empty Message Styles */
+.empty-message {
+  /* display: none; */
+  /* Hide by default */
+  text-align: center;
+  color: #888;
+  font-size: 18px;
+  margin-top: 110px;
+}
+
+/* Task List Styles */
+.task-options {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  margin-right: 25px;
+}
+
+.edit-icon,
+.delete-icon {
+  cursor: pointer;
+  font-size: 20px;
+  transition: color 0.3s;
+}
+
+.edit-icon:hover {
+  color: #28a745;
+  /* Green for edit */
+}
+
+.delete-icon:hover {
+  color: #dc3545;
+  /* Red for delete */
+}
+
+.scaffold-message {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgb(165, 165, 165);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  opacity: 0;
+  animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Set task card container width */
+.task-card {
+  width: 70%; /* Set the width to 70% */
+  margin-bottom: 20px;
+  /* padding: 15px; */
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+/* Style task card rows with flexbox */
+.task-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Add spacing for task card headers and content */
+.task-card h3 {
+  margin: 0 0 5px 0;
+}
+
+.task-card p {
+  margin: 5px 0;
+}
+
+.task-date {
+  font-size: 0.9em;
+  color: #555;
+}
+
+/* Task options for delete/edit buttons */
+.task-options {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+}
+
+/* Style for the edit and delete buttons */
+.edit-icon,
+.delete-icon {
+  cursor: pointer;
+  font-size: 1.2em;
+  color: #555;
+}
+
+.edit-icon:hover {
+  color: #007bff;
+}
+
+.delete-icon:hover {
+  color: #dc3545;
+}
+
+canvas {
+  max-width: 600px;
+  max-height: 400px;
+  background-color: #ffffff; /* Optional: makes the canvas stand out */
+}

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Tracker</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1><i class="fa-solid fa-clipboard-list"></i> Task Tracker</h1>
+
+      <!-- Create Task Button -->
+      <div class="row" style="display: flex; gap: 10px">
+        <button id="createTaskButton">
+          <i class="fa-solid fa-plus"></i> Create
+        </button>
+        <button id="filterTaskButton">
+          <i class="fa-solid fa-filter"></i> Filter
+        </button>
+      </div>
+
+      <!-- Modal for Creating Tasks -->
+      <div id="taskModal" class="modal">
+        <div class="modal-content">
+          <span id="closeModal" class="close">&times;</span>
+          <h2><i class="fa-solid fa-tasks"></i> Create Task</h2>
+          <p>
+            <font size="2">Required fields are marked with an asterisk *</font>
+          </p>
+          <form id="taskForm">
+            <p>
+              <font size="2"><b>Client Name *</b></font>
+            </p>
+            <input
+              type="text"
+              id="clientName"
+              class="modal-input"
+              placeholder="Client"
+              required
+            />
+
+            <p>
+              <font size="2"><b>Task Description *</b></font>
+            </p>
+            <input
+              type="text"
+              id="taskDescription"
+              class="modal-input"
+              placeholder="Task Description"
+              required
+            />
+
+            <p>
+              <font size="2"><b>Team Leader *</b></font>
+            </p>
+            <input
+              type="text"
+              id="teamLeader"
+              class="modal-input"
+              placeholder="Team Leader"
+              required
+            />
+
+            <p>
+              <font size="2"><b>Team Member *</b></font>
+            </p>
+            <input
+              type="text"
+              id="teamMember"
+              class="modal-input"
+              placeholder="Team Member"
+              required
+            />
+
+            <div
+              class="row"
+              style="
+                display: flex;
+                justify-content: space-between;
+                padding-top: 10px;
+              "
+            >
+              <label for="targetDate">
+                <i class="fa-solid fa-calendar"></i> Target Date *
+                <input type="date" id="targetDate" required />
+              </label>
+
+              <label for="actualDate">
+                <i class="fa-solid fa-calendar-alt"></i> Actual Date
+                <input type="date" id="actualDate" />
+              </label>
+            </div>
+            <div
+              class="row"
+              style="
+                display: flex;
+                justify-content: flex-end;
+                gap: 10px;
+                padding-top: 50px;
+              "
+            >
+              <button type="button" class="cancel-button">
+                <i class="fa-solid fa-times"></i> Cancel
+              </button>
+              <button type="submit" class="create-button">
+                <i class="fa-solid fa-check"></i> Create
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Filter Modal -->
+      <div id="filterModal" class="modal">
+        <div class="modal-content">
+          <span id="closeFilterModal" class="close">&times;</span>
+          <h2><i class="fa-solid fa-filter"></i> Filter Tasks</h2>
+          <form id="filterForm">
+            <div
+              class="row"
+              style="
+                display: flex;
+                justify-content: space-between;
+                padding-top: 10px;
+              "
+            >
+              <label for="filterTargetDate">
+                <i class="fa-solid fa-calendar"></i> Target Date
+                <input type="date" id="filterTargetDate" />
+              </label>
+              <!-- <label for="filterTargetDate">Target Date</label>
+            <input type="date" id="filterTargetDate" /> -->
+              <label for="filterActualDate">
+                <i class="fa-solid fa-calendar"></i> Actual Date
+                <input type="date" id="filterActualDate" />
+              </label>
+              <!-- <label for="filterActualDate">Actual Date</label>
+            <input type="date" id="filterActualDate" /> -->
+            </div>
+
+            <div
+              class="row"
+              style="
+                display: flex;
+                justify-content: space-between;
+                padding-top: 10px;
+              "
+            >
+              <label for="filterTeamLeader">
+                <i class="fa-solid fa-list"></i> Team Leader
+                <input
+                  type="text"
+                  id="filterTeamLeader"
+                  placeholder="Team Leader"
+                />
+              </label>
+
+              <label for="filterTeamMember">
+                <i class="fa-solid fa-list"></i> Team Member
+                <input
+                  type="text"
+                  id="filterTeamMember"
+                  placeholder="Team Member"
+                />
+              </label>
+            </div>
+
+            <div
+              class="row"
+              style="
+                display: flex;
+                justify-content: flex-end;
+                gap: 10px;
+                padding-top: 50px;
+              "
+            >
+              <button type="button" id="clearFilter" class="cancel-button">
+                Clear
+              </button>
+              <button type="button" id="applyFilter" class="create-button">
+                Apply
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Task List Section -->
+
+      <div
+        class="row"
+        style="
+          display: flex;
+          justify-content: space-between;
+          gap: 40px;
+          padding-top: 50px;
+        "
+      >
+        <div id="taskList">
+          <h2><i class="fa-solid fa-list"></i> Tasks List</h2>
+          <div id="emptyMessage" class="empty-message">
+            <i class="fa-solid fa-circle-info"></i> No tasks to display. Please
+            create a task.
+          </div>
+          <ul id="tasks"></ul>
+        </div>
+        <canvas id="lineGraph" style="padding-top: 10px"></canvas>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="chart.js"></script>
+  </body>
+</html>
